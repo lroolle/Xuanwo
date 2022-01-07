@@ -1,3 +1,4 @@
+- Tracked at https://github.com/Xuanwo/Xuanwo/issues/14
 - 需要回答的问题
 	- 什么是 CI？
 	- 我们为什么需要 CI？
