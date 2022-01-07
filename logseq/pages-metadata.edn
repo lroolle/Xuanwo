@@ -87,7 +87,7 @@
   :block/updated-at 1641570460618}
  {:block/name "ci of open source projects",
   :block/created-at 1641269225995,
-  :block/updated-at 1641269269735}
+  :block/updated-at 1641573519537}
  {:block/name "clickhouse",
   :block/created-at 1641460811550,
   :block/updated-at 1641460982931}
