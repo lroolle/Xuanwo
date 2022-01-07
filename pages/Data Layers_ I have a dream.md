@@ -1,6 +1,10 @@
 title:: Data Layers: I have a dream
 
 - 现状
+	- Online ETL?
+		- extract
+		- transform
+		- load
 - 梦想
 	- data accessor: from any storage services
 		- fs/nfs/nas

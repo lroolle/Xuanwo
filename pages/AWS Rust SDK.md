@@ -32,3 +32,6 @@
 		- disable_ssl
 		- path_style
 		- sig_v4/v2
+- https://docs.aws.amazon.com/sdk-for-rust/latest/dg/s3-object-lambda.html
+	- 但是这个 uri_template 要求 `&'static str`
+	- 太奇怪了。。

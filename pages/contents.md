@@ -1,6 +1,6 @@
 - Hi，我是漩涡。
 -
-- 这里是 Xuanwo's Note，存放我工作与学习的中间产物。
+- 这里是 Xuanwo's Note
 	- 查看本站的源代码 [Xuanwo/Xuanwo](https://github.com/Xuanwo/Xuanwo)，欢迎 Star 本项目以示支持
 	- 发现错误请在 [Issues](https://github.com/Xuanwo/Xuanwo/issues) 提交反馈
 	- 探讨具体问题请在 [Discussions](https://github.com/Xuanwo/Xuanwo/discussions) 开启讨论
@@ -13,7 +13,7 @@
 	- [[Paper]]: 在看的 Paper
 	- [[Article]]: 在读的文章
 	- [[Blog]]: 未完成的 blog 草稿
-	- [[Iteration]]: 我的工作以公开的形式托管在 Github Projects
+	- [[Iteration]]: 我的工作以公开的形式托管在 [Xuanwo's Work](https://work.xuanwo.io)
 	- [[Databend]]
 - Areas
 	- [[Automation]]
