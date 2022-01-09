@@ -9,12 +9,10 @@
 	- 工作产出 [Xuanwo's Work](https://work.xuanwo.io)
 	- 代码产出 [Xuanwo's Github](https://github.com/Xuanwo)
 -
+- [[Inbox]]
 - Projects
-	- [[Paper]]: 在看的 Paper
-	- [[Article]]: 在读的文章
-	- [[Blog]]: 未完成的 blog 草稿
-	- [[Iteration]]: 我的工作以公开的形式托管在 [Xuanwo's Work](https://work.xuanwo.io)
-	- [[Databend]]
+	- New Blog: [[Data Layers: I have a dream]]
+	- New Blog: [[CI of Open Source Projects]]
 - Areas
 	- [[Automation]]
 	- [[Database]]
@@ -22,6 +20,9 @@
 	- [[Rust]]
 	- [[Linux]]
 - Resources
-	- [[App]]: 我感兴趣和在使用的应用
-- Archives
-	-
+	- [[App]]
+	- [[Article]]
+	- [[Iteration]]
+	- [[Paper]]
+	- [[Blog]]
+- [[Archives]]

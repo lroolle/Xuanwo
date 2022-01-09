@@ -170,7 +170,7 @@
  :feature/enable-timetracking? false
  :publishing/all-pages-public? true
  :feature/enable-journals? true
- :favorites ["Contents" "Journals"]
+ :favorites ["Inbox" "Contents" "Journals"]
  :default-home {:page "Contents"}
 
  ;; any number between 0 and 1 (the greater it is the faster the changes of the next-interval of card reviews) (default 0.5)
