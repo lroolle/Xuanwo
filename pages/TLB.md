@@ -3,7 +3,7 @@
 -
 - 指令和数据可以使用不同的缓存，也就是 [[iTLB]] 和 [[dTLB]]，或者使用统一的缓存，即 [[uTLB]]，在此基础上还有可能进一步进行分块 [[bTLB]]。
 -
-- 如果 TLB 命中的话，[[CPU]] 花费 0.5 到 1 个[[时钟周期]]就能获取到能内存地址，否则就会需要 10
+- 如果 TLB 命中的话，[[CPU]] 花费 0.5 到 1 个[[时钟周期]]就能获取到能内存地址，否则就会需要 10 到 30 个[[时钟周期]]。
 -
 - 参考资料
 	- [Wikipedia: Translation lookaside buffer](https://en.wikipedia.org/wiki/Translation_lookaside_buffer)
