@@ -167,6 +167,9 @@
  {:block/name "git host",
   :block/created-at 1641456448481,
   :block/updated-at 1641456448481}
+ {:block/name "git 删除远端 tag",
+  :block/created-at 1641616412611,
+  :block/updated-at 1641616522131}
  {:block/name "github",
   :block/created-at 1641268791756,
   :block/updated-at 1641364443718}
