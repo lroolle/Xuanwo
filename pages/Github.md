@@ -1,4 +1,4 @@
-type:: [[App]]
+type:: [[Product]]
 features:: [[Git Host]]
 
 -

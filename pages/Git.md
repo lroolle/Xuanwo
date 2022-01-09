@@ -1,4 +1,4 @@
-type:: [[App]]
+type:: [[Product]]
 features:: [[Version Control]]
 
 - 将所有的 commit squash 成同一个

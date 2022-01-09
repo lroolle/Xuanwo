@@ -1,4 +1,4 @@
-type:: [[App]], [[Linux]]
+type:: [[Product]], [[Linux]]
 features:: [[Linux Distribution]]
 
 -

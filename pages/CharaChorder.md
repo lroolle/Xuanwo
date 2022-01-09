@@ -1,4 +1,7 @@
-- https://www.charachorder.com/
+type:: [[Product]]
+features:: [[Keyboard]]
+
+- https://www.charachorder.com/-
 - ![image.png](../assets/image_1641700150401_0.png)
 - ![image.png](../assets/image_1641700155343_0.png)
 -

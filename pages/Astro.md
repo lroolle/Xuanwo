@@ -1,4 +1,5 @@
-type:: [[App]]
+title:: Astro
+type:: [[Product]]
 features:: [[Static Site Generation]]
 
 - https://github.com/withastro/astro

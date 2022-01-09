@@ -1,4 +1,5 @@
-type:: [[App]]
+title:: Whimsical
+type:: [[Product]]
 features:: [[Wireframe]], [[Mindmap]], [[Flowchart]]
 
 - Where great ideas take shape

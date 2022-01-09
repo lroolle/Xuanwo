@@ -20,9 +20,9 @@
 	- [[Rust]]
 	- [[Linux]]
 - Resources
-	- [[App]]
 	- [[Article]]
 	- [[Iteration]]
 	- [[Paper]]
+	- [[Product]]
 	- [[Blog]]
 - [[Archives]]

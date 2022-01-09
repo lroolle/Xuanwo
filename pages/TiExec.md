@@ -1,0 +1,8 @@
+- TiExec 是 [[TiDB]] Hackathon  2021 上很有意思的一个项目
+-
+- TiExec 会尝试缓解其所加载应用程序在未来执行时可能面临的 iTLB-Cache-Miss 问题，因此会为那些正在遭受 iTLB-Cache-Miss 惩罚的应用程序带来一定的直接性能提升，比如，在 TiDB 的某 OLTP 场景下对部分组件通过 TiExec 优化之后的测试显示能带来约 6-11% 的整体性能提升。
+-
+- 要理解这个项目，首先我们要搞明白 iTLB-Cache-Miss 是在说什么
+- 首先是
+	- {{embed [[TLB]]}}
+-

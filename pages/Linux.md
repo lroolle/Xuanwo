@@ -1,4 +1,4 @@
-type:: [[App]]
+type:: [[Product]]
 features:: [[OS]]
 
 - 查看网卡型号

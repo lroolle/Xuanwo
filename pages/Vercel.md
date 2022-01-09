@@ -1,4 +1,4 @@
-type:: [[App]]
+type:: [[Product]]
 features:: [[Web Host]]
 
 - 域名重定向
