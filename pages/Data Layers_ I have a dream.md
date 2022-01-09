@@ -9,6 +9,7 @@ title:: Data Layers: I have a dream
 	- data accessor: from any storage services
 		- fs/nfs/nas
 		- s3/gcs/oss/cos/...
+		- ipfs/filecoin/...
 	- data connector: from any sevices
 		- SaaS services
 			- github
@@ -22,6 +23,8 @@ title:: Data Layers: I have a dream
 				- csv
 				- parquet
 			- steaming (http input)?
+		- Custom
+			- fetch data from block chain (BTC, ETH, ...)
 - 规划
 - 现在的进展
 - 参考资料

@@ -9,7 +9,6 @@
 	- 工作产出 [Xuanwo's Work](https://work.xuanwo.io)
 	- 代码产出 [Xuanwo's Github](https://github.com/Xuanwo)
 -
-- [[Inbox]]
 - Projects
 	- New Blog: [[Data Layers: I have a dream]]
 	- New Blog: [[CI of Open Source Projects]]
