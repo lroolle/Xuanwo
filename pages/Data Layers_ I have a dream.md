@@ -9,13 +9,20 @@ title:: Data Layers: I have a dream
 	- data accessor: from any storage services
 		- fs/nfs/nas
 		- s3/gcs/oss/cos/...
-	- data connector: from any SaaS
-		- pre-defined metadata
+	- data connector: from any sevices
+		- SaaS services
 			- github
 			- slack
-		- user-defined metadata
+		- Databases
 			- mysql
-			- clickhouse
-			- file (csv, parquet)
+			- clichhouse
+		- Files (with user defined metadata)?
+			- 有些文件本身是自带格式的，比如说 httpd / nginx 的日志文件
+			- 有些则携带部分元数据
+				- csv
+				- parquet
+			- steaming (http input)?
 - 规划
 - 现在的进展
+- 参考资料
+	- [Prestodb Connectors](https://prestodb.io/docs/current/connector.html)
