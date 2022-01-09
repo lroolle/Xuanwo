@@ -1,2 +1,3 @@
-- {{query (page-property type Article)}}
-  query-properties:: [:page :link]
+- Inbox
+	- {{query (and (page-property type Article) (page-property status)) )}}
+	  query-properties:: [:page :link]
