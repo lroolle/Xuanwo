@@ -1,0 +1,8 @@
+- 问题
+	- Async 的 Task 是如何调度的？
+	- poll() 是什么时候执行的？
+	- [[Rust Stream 与 AsyncRead 的区别]]
+-
+- 参考资料
+	- [Async/Await](https://os.phil-opp.com/async-await/)
+	- [Async Calcellation-1](https://blog.yoshuawuyts.com/async-cancellation-1/)
