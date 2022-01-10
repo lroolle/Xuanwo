@@ -2,6 +2,12 @@
 	- Async 的 Task 是如何调度的？
 	- poll() 是什么时候执行的？
 	- [[Rust Stream 与 AsyncRead 的区别]]
+	- Send 和 Sync 是什么意思？
+		- https://github.com/Xuanwo/Xuanwo/issues/10
+	- Async 和 Await 分别是做什么用的
+		- https://github.com/Xuanwo/Xuanwo/issues/16
+	- Pin 是做什么用的？
+		- https://github.com/Xuanwo/Xuanwo/issues/6
 -
 - 参考资料
 	- [Async/Await](https://os.phil-opp.com/async-await/)
