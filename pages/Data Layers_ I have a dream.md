@@ -7,7 +7,10 @@ title:: Data Layers: I have a dream
 		- load
 -
 - 梦想
-	- data = format + binary (?)
+	- data layer = protocol + stream
+	-
+	- protocol
+		-
 	-
 	- format
 		- [[Avro]]
