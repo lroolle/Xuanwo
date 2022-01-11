@@ -16,4 +16,8 @@ alias:: Apache Arrow
 		- O(1) (constant-time) random access
 	- 向量化友好
 		- SIMD and vectorization-friendly
-	-
+	- 零拷贝访问
+		- Relocatable without “pointer swizzling”, allowing for true zero-copy access in shared memory
+- 性能测试
+	- [Benchmarks Tools](https://arrow.apache.org/docs/developers/benchmarks.html)
+	- [Language-independent Continuous Benchmarking (CB) for Apache Arrow](https://github.com/ursacomputing/benchmarks)
