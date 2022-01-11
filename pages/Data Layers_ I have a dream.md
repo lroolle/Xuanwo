@@ -27,6 +27,7 @@ title:: Data Layers: I have a dream
 		- Query Pushdown
 			- S3 Selcet
 			- Big Query?
+		- Online ETL
 	- Data Connector
 		- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
 		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
