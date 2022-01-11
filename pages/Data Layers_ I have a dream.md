@@ -11,9 +11,9 @@ title:: Data Layers: I have a dream
 		- Parquet
 		- Value
 - 用户故事
-	- 从 MySQL 中载入数据
-	- 从 MySQL 在 S3 的备份中载入数据
-	- 从 S3 上的 parquet 文件中载入数据
+	- 将 X 存储上的 Y 数据导入到 Databend
+	- X = s3/gcs/oss
+	- Y = avro/parquet/csv/orc
 - 想法
 	- Features
 		- CDC: change data capture
@@ -24,27 +24,20 @@ title:: Data Layers: I have a dream
 		- Query Pushdown
 			- S3 Selcet
 			- Big Query?
-			- Github Search? (interesting)
 	- Data Connector
-		- File
-			- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
-			- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
-		- MySQL
-		- Clickhouse
-		- Kafka
-		- Github
-- 疑问
-	- Engine 是一个好名字吗？
-		- 如果要支持多种数据源，是不是采用 Stage 更合理？
-			- COPY INTO？
-			- [Snowpipe](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-intro.html)
+		- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
+		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
 - 规划
 	- DAL2
-	- Databend Data Integration
+	- ```sql
+	  copy into default.test from '@stage' format parquet;
+	  ```
+	-
 - 现在的进展
 	- DAL2 refactor
 		- implement s3 support
 - 参考资料
 	- [Prestodb Connectors](https://prestodb.io/docs/current/connector.html)
 	- [[Apache Flink/Connectors]]
+	- [Snowpipe](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-intro.html)
 -
