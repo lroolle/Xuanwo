@@ -12,33 +12,18 @@ title:: Data Layers: I have a dream
 - 想法
 	- data layer 应该由几个彼此正交的组件构建
 	-
-	- Data Source
-	- Data Destination
-	-
 	- Data Accessor: read from / write into storage services
 		- fs/[[nfs]]/[[nas]]
 		- [[s3]]/[[gcs]]/oss/cos/...
 		- ipfs/filecoin/...
-	- Data Parser？
+	- Data Format: parse from/format into binary/stream
 		- [[Avro]]
 		- [[Parquet]]
 		- [[CSV]]
-		- mysql dump？
+		- httpd/nginx log？
+		- mysql record?
 	- Data Connector
 		-
-	-
-	- data connector: from any sevices
-		- Databases
-			- [[mysql]]
-			- [[clickhouse]]
-		- Files (with user defined metadata)?
-			- 有些文件本身是自带格式的，比如说 httpd / nginx 的日志文件
-			- 有些则携带部分元数据
-				- [[csv]]
-				- [[parquet]]
-			- steaming (http input)?
-		- Custom
-			- fetch data from block chain (BTC, ETH, ...)
 - 规划
 - 现在的进展
 - 参考资料
