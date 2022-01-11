@@ -1,0 +1,51 @@
+title:: Data Layers: I have a dream
+
+- 现状
+	- Online ETL?
+		- extract
+		- transform
+		- load
+-
+- 梦想
+	- data = format + binary (?)
+	-
+	- format
+		- [[Avro]]
+		- [[Parquet]]
+		- [[CSV]]
+	-
+	-
+	- connector = meta + stream
+		- github
+		- slack
+		-
+		- mysql
+		- clickhouse
+		-
+		- [[JuiceFS]]
+	-
+	- data accessor: from any storage services
+		- fs/[[nfs]]/[[nas]]
+		- [[s3]]/[[gcs]]/oss/cos/...
+		- ipfs/filecoin/...
+	- data connector: from any sevices
+		- SaaS services
+			- [[github]]
+			- [[slack]]
+		- Databases
+			- [[mysql]]
+			- [[clickhouse]]
+		- Files (with user defined metadata)?
+			- 有些文件本身是自带格式的，比如说 httpd / nginx 的日志文件
+			- 有些则携带部分元数据
+				- [[csv]]
+				- [[parquet]]
+			- steaming (http input)?
+		- Custom
+			- fetch data from block chain (BTC, ETH, ...)
+- 规划
+- 现在的进展
+- 参考资料
+	- [Prestodb Connectors](https://prestodb.io/docs/current/connector.html)
+	- [[Apache Flink/Connectors]]
+-
