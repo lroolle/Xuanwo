@@ -10,20 +10,20 @@ title:: Data Layers: I have a dream
 	- 从 MySQL 在 S3 的备份中载入数据
 	- 从 S3 上的 parquet 文件中载入数据
 - 想法
-	- data layer 应该由几个彼此正交的组件构建
-	-
-	- Data Accessor: read from / write into storage services
-		- fs/[[nfs]]/[[nas]]
-		- [[s3]]/[[gcs]]/oss/cos/...
-		- ipfs/filecoin/...
-	- Data Format: parse from/format into binary/stream
-		- [[Avro]]
-		- [[Parquet]]
-		- [[CSV]]
-		- httpd/nginx log？
-		- mysql record?
+	- Features
+		- CDC: change data capture
+			- HTTP Webhook
+			- Database CDC
+		- Scheduled data fetch
+			- Load from source per hours?
 	- Data Connector
-		-
+		- File
+			- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
+			- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
+		- MySQL
+		- Clickhouse
+		- Kafka
+		- Github
 - 规划
 - 现在的进展
 - 参考资料
