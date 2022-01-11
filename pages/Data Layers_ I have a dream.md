@@ -5,36 +5,29 @@ title:: Data Layers: I have a dream
 		- extract
 		- transform
 		- load
--
-- 梦想
-	- data layer = protocol + stream
+- 用户故事
+	- 从 MySQL 中载入数据
+	- 从 MySQL 在 S3 的备份中载入数据
+	- 从 S3 上的 parquet 文件中载入数据
+- 想法
+	- data layer 应该由几个彼此正交的组件构建
 	-
-	- protocol
-		-
+	- Data Source
+	- Data Destination
 	-
-	- format
-		- [[Avro]]
-		- [[Parquet]]
-		- [[CSV]]
-	-
-	-
-	- connector = meta + stream
-		- github
-		- slack
-		-
-		- mysql
-		- clickhouse
-		-
-		- [[JuiceFS]]
-	-
-	- data accessor: from any storage services
+	- Data Accessor: read from / write into storage services
 		- fs/[[nfs]]/[[nas]]
 		- [[s3]]/[[gcs]]/oss/cos/...
 		- ipfs/filecoin/...
+	- Data Parser？
+		- [[Avro]]
+		- [[Parquet]]
+		- [[CSV]]
+		- mysql dump？
+	- Data Connector
+		-
+	-
 	- data connector: from any sevices
-		- SaaS services
-			- [[github]]
-			- [[slack]]
 		- Databases
 			- [[mysql]]
 			- [[clickhouse]]
