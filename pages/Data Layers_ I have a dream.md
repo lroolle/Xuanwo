@@ -33,8 +33,14 @@ title:: Data Layers: I have a dream
 		- Clickhouse
 		- Kafka
 		- Github
+- 疑问
+	- Engine 是一个好名字吗？
+		- 如果要支持多种数据源，是不是采用 Stage 更合理？
+			- COPY INTO？
+			- [Snowpipe](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-intro.html)
 - 规划
-	-
+	- DAL2
+	- Databend Data Integration
 - 现在的进展
 	- DAL2 refactor
 		- implement s3 support
