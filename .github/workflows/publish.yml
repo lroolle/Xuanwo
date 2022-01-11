@@ -23,3 +23,5 @@ jobs:
           branch: gh-pages
           folder: www
           clean: true
+          single-commit: true
+
