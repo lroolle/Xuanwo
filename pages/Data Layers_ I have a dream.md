@@ -1,10 +1,15 @@
 title:: Data Layers: I have a dream
 
 - 现状
-	- Online ETL?
-		- extract
-		- transform
-		- load
+	- Table Trait
+	- Engine
+		- Fuse (file based)
+		- Github
+		- Memory
+	- Stream Source
+		- CSV
+		- Parquet
+		- Value
 - 用户故事
 	- 从 MySQL 中载入数据
 	- 从 MySQL 在 S3 的备份中载入数据
@@ -16,6 +21,10 @@ title:: Data Layers: I have a dream
 			- Database CDC
 		- Scheduled data fetch
 			- Load from source per hours?
+		- Query Pushdown
+			- S3 Selcet
+			- Big Query?
+			- Github Search? (interesting)
 	- Data Connector
 		- File
 			- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
@@ -25,7 +34,10 @@ title:: Data Layers: I have a dream
 		- Kafka
 		- Github
 - 规划
+	-
 - 现在的进展
+	- DAL2 refactor
+		- implement s3 support
 - 参考资料
 	- [Prestodb Connectors](https://prestodb.io/docs/current/connector.html)
 	- [[Apache Flink/Connectors]]
