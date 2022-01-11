@@ -1,5 +1,8 @@
 title:: Data Layers: I have a dream
 
+-
+- [Slide]( https://docs.google.com/presentation/d/1EoyjA923gq4gvHmIW3Kcp7UQ519hrflw4CeCRDR1EE0/edit?usp=sharing)
+-
 - 现状
 	- Table Trait
 	- Engine
@@ -29,6 +32,7 @@ title:: Data Layers: I have a dream
 		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
 - 规划
 	- DAL2
+	- Cloud Native Storage Format
 	- ```sql
 	  copy into default.test from '@stage' format parquet;
 	  ```
