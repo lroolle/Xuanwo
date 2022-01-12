@@ -147,7 +147,26 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 除此以外，整个系统之后每个 block 每隔几天就会被重新校验一下
 		- 这个概念实际上是暴露到用户侧的
 			- azblob 的用户上传大文件的时候就需要连续上传最大 4MB 的 block
-			- 然后最后调用 commit 接口来
+			- 然后最后调用 Put Block List 接口来 commit
+			- 最新的版本中将这个限制放开到了 4000 MiB，推测内部的实现应该改了
+			- ![image.png](../assets/image_1642002252913_0.png)
+	- Extent
+		- 复制的最小单元，默认的配置是三副本
+		- 每个 Extent 都是一个 [[NTFS]]  文件，包含一组连续的 Block
+		- 小文件优化
+			- Partiton Layer 会将小文件 append 进同一个 extent 甚至是同一个 block
+		- 大文件优化 (Blobs)
+			- Partition Layer 会将大文件拆分成不同的 extent
+		- Partition Layer 会跟踪每个 Object 由哪个 Stream，Extent 及其 Offset 组成
+	- Stream
+		- Stream 是一组 Extent **指针** 的有序列表，支持追加写最后一个 extent 和随机读
+		- 从已有的 Stream 中的部分内容构造出一个新 Stream 是一个开销很小的操作
+			- 因为只需要更新一组指针
+			- 这个特性能用于优化 Copy 相关的操作
+				- #idea 难怪 [[azblob]] 支持 [Put Blob List](https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-list) 这种操作
+					- 先进啊，太先进了
+			- 此外灾备的时候也很有用处
+		- 只有最后一个 Extent 可写(append)，前面的 Extent 都是 immutable 的
 	-
 - ---
 - 无用但有趣的一些小发现
