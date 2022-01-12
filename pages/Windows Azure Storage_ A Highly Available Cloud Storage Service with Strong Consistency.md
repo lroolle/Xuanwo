@@ -21,7 +21,6 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- 多租户和存储成本
 		- WAS 对存储成本的理解是比用户在自有硬件上承载相同的负载要更低
 - Global Partitioned Namespace
-  collapsed:: true
 	- WAS 采用全球统一的命名规则
 	- `http(s)://AccountName.<service>.core.windows.net/PartitionName/ObjectName`
 	- 其中
@@ -72,8 +71,25 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 为了容量，事务和带宽中取得平衡，WAS 会尽量保证空间利用率在 70% 左右
 			- 会尽量避免利用率超过 80%，因为要预留 20% 的空间来防止寻道时间过长和灾备
 			- 当空间超过 70% 的时候就会主动触发迁移，将 accounts 迁移到别的 stamp
-			- Question: 如果单个 Account 存储的数据超过 Stamp 怎么办？
-				-
+			- #question 如果单个 Account 存储的数据超过 Stamp 怎么办？
+				- 凉拌，看起来设计上就不允许超过
+				- [文档](https://docs.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account) 给出了每个 storage account 的最大配额
+					- ![image.png](../assets/image_1641993632655_0.png)
+				- 注意这是整个 storage account 共用的
+				- 不过 Azure 在文档页高亮了提示，如果超过配额可以找客服申请
+					- 我推测应该是会存在更大的 Stamp，可以将这个 Account 迁移过去
+	- Location Service (LS)
+		- **The location service manages all the storage stamps.**
+		- LS 会负责所有 Storage Stamps 的管理，将 Account 映射到 Storage Stamps，处理 Account 在 Stamps 之间的迁移
+		- 它本身会在两个地理位置不同的数据中心部署用来做灾备
+		- LS 会支持增加新的 Region，新的 Location (感觉上是 AZ 的意思) 和新的 Stamps
+		- 论文中给出了一个典型的 Account 创建流程
+			- App 请求创建一个新的 Account，请求中会携带指定的 Location
+			- LS 会在指定的 Location 选择一个 Stamp 作为该帐号的主 Stamp
+				- 选择的算法中会基于所有 Stamp 的负载信息做一些启发式分析
+				- 比如说 Stamp 的存储负载，流量和事务的频次
+			- 然后 LS 会在这个 Stamp 中存储 Account 相关的 Metadata 信息以通知 Stamp 开始处理这个 Account 的流量
+			- 最后 LS 会更新 DNS，将 `http(s)://AccountName.<service>.core.windows.net/` 的解析目标修改为主 Stamp 的 VIP
 	-
 - ---
 - 无用但有趣的一些小发现
