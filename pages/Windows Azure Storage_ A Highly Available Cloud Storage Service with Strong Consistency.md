@@ -114,6 +114,9 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- #question 这个有点奇怪，按照目前的设计，FE 还需要直接从 Stream 读取数据吗？
 	- Two Replication Engines
 		- Intra-Stamp Replication (stream layer)
+			- synchronous replication
+			- stream layer 内部的同步 replication 在 Write IO 的核心路径上
+			- 每次写入的时候
 		- Inter-Stamp Replication (partition layer)
 - Stream Layer
 - ---
