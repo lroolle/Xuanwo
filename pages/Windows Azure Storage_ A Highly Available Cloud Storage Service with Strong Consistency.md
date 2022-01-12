@@ -90,7 +90,18 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 比如说 Stamp 的存储负载，流量和事务的频次
 			- 然后 LS 会在这个 Stamp 中存储 Account 相关的 Metadata 信息以通知 Stamp 开始处理这个 Account 的流量
 			- 最后 LS 会更新 DNS，将 `http(s)://AccountName.<service>.core.windows.net/` 的解析目标修改为主 Stamp 的 VIP
-	-
+	- Three Layers within a Storage Stamp
+		- Stream Layer
+			- **This layer stores the bits on disk and is in charge of distributing and replicating the data across many servers to keep data durable within a storage stamp. **
+			- 实际上可以理解为一个跨节点的大号 SSD
+			- 它负责对外提供 Stream 的抽象
+				- Stream 是由 Extents 组成的有序列表，Extents 是一个连续数据 Chunk
+		- Partition Layer
+		- Front-End (FE) layer
+	- Two Replication Engines
+		- Intra-Stamp Replication (stream layer)
+		- Inter-Stamp Replication (partition layer)
+- Stream Layer
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
