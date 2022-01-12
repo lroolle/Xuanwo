@@ -19,6 +19,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- 多租户和存储成本
 		- WAS 对存储成本的理解是比用户在自有硬件上承载相同的负载要更低
 - Global Partitioned Namespace
+  collapsed:: true
 	- WAS 采用全球统一的命名规则
 	- `http(s)://AccountName.<service>.core.windows.net/PartitionName/ObjectName`
 	- 其中
@@ -48,9 +49,19 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- Standard：标准存储
 			- Standard_IA： 低频存储
 			- Archive: 归档存储
-		-
+			- One Zone-IA: 其他的存储级别会在至少三个 AZ 中存储一份，这个存储级别只存储一份，价格会便宜 20%
+		- 具体到实现上，大家可能会用三副本来实现 Standard，用
+		- 但是 WAS 这里就把这两个维度拆开了，变成了正交的关系
+			- Account 级别配置 Redundancy
+			- Blobs 级别可以配置 Access Tier
+		- 感觉非常的优雅而合理
+- High Level Architecture
+	- ![image.png](../assets/image_1641989364550_0.png)
+	-
+	-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
 		- 后来 WAS 把前面的 windows 去掉了，只说 Azure Storage
 		- 肯定跟这个没关系 (
+-
