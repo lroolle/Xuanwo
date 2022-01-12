@@ -114,10 +114,21 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- #question 这个有点奇怪，按照目前的设计，FE 还需要直接从 Stream 读取数据吗？
 	- Two Replication Engines
 		- Intra-Stamp Replication (stream layer)
-			- synchronous replication
-			- stream layer 内部的同步 replication 在 Write IO 的核心路径上
-			- 每次写入的时候
+			- stream layer 内部的同步 Replication 在 Write IO 的核心路径上
+			- Block 粒度(每一笔 IO)
+			- 应该是每次写入的时候会写入位于不同节点的多个副本
+			- 只有 replication 同步成功，写入请求才会返回成功
 		- Inter-Stamp Replication (partition layer)
+			- 跨 Stamp 的异步 Replication 不在 IO 核心路径上
+			- Object 粒度 (包括跟这个 Object 相关的事务)
+			- 用来提供
+				- 用户的数据冗余，作为灾备
+				- 前面提到的跨 Stamp 迁移 Account
+		- Why two ways？
+			- 他们针对的是不同场景
+			- Intra-Stamp Replication 想处理的是硬件故障
+			- 而 Inter-Stamp Replication 想处理的是整个机房挂掉的场景
+			- 前者在用户的核心 IO 路径上，所以延迟要求很高；而后者不在，所以只要速度能接受就行
 - Stream Layer
 - ---
 - 无用但有趣的一些小发现
