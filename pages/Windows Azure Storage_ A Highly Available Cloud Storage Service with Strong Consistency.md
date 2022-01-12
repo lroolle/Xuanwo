@@ -152,6 +152,11 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- ![image.png](../assets/image_1642002252913_0.png)
 	- Extent
 		- 复制的最小单元，默认的配置是三副本
+			- #question 前面提到 Intra-Stamp Replication 是 Block 粒度的备份，跟这里的描述似乎有些冲突
+				- 前文的原话是
+					- > intra-stamp replication is focused on replicating blocks of disk storage that are used to make up the objects.
+					- 感觉这里的 Block 应该在指代不同的东西
+					- `blocks of disk storage` 指磁盘上连续的 block，也就是 Extent，并非上面提到的 Block
 		- 每个 Extent 都是一个 [[NTFS]]  文件，包含一组连续的 Block
 		- 小文件优化
 			- Partiton Layer 会将小文件 append 进同一个 extent 甚至是同一个 block
@@ -167,7 +172,12 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 					- 先进啊，太先进了
 			- 此外灾备的时候也很有用处
 		- 只有最后一个 Extent 可写(append)，前面的 Extent 都是 immutable 的
-	-
+	- Stream Manager and Extent Nodes
+		- 接下来看看组成 Stream Layer 的组件
+		- ![image.png](../assets/image_1642003395836_0.png)
+		- Stream Manager (SM)
+			- The SM keeps track of the stream namespace, what extents are in each stream, and the extent allocation across the Extent Nodes (EN).
+			-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
