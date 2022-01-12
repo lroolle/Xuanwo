@@ -130,6 +130,25 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 而 Inter-Stamp Replication 想处理的是整个机房挂掉的场景
 			- 前者在用户的核心 IO 路径上，所以延迟要求很高；而后者不在，所以只要速度能接受就行
 - Stream Layer
+	- *重头戏登场*
+	- The stream layer provides an internal interface used only by the partition layer.
+	- Stream 提供一个类似于 file system 的 API，只不过所有的写入都是 Append Only 的
+		- 它支持客户端 open，close，delete，rename，read，append 和 concat
+	- 一个 Stream 是一个由 Extent 组成的有序列表，而 Extent 是一组连续的 Append Block
+	- ![image.png](../assets/image_1642001477623_0.png)
+	- 注意这里的 `Sealed`
+		- Sealed Extent 就不能再 Append 新数据了，只有最后一个 Unsealed Extent E4 可以追加新数据
+		- 论文明确指出 Stream 只有最后一个 Extent appendable，之前的 Extent 都是 immutable 的
+	- Block
+		- 读写的最小单元，最大 4MB
+		- Client 可以不断的向 Extent 追加不同 size 的 Block
+		- 读取数据的时候，不管读多少，整个 block 的内容都会被读取
+			- WAS 在 block level 存储一个 checksum，每次读取的时候会校验数据是否正确，防止静默错误
+			- 除此以外，整个系统之后每个 block 每隔几天就会被重新校验一下
+		- 这个概念实际上是暴露到用户侧的
+			- azblob 的用户上传大文件的时候就需要连续上传最大 4MB 的 block
+			- 然后最后调用 commit 接口来
+	-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
