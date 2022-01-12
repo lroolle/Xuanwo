@@ -95,9 +95,23 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- **This layer stores the bits on disk and is in charge of distributing and replicating the data across many servers to keep data durable within a storage stamp. **
 			- 实际上可以理解为一个跨节点的大号 SSD
 			- 它负责对外提供 Stream 的抽象
-				- Stream 是由 Extents 组成的有序列表，Extents 是一个连续数据 Chunk
+				- Stream 是由 Extents 组成的有序列表，Extents 表示一组连续的数据 Chunk
+				- 处理如何存储，如何复制等问题，不理解上层的抽象和语义
+				- 只负责写，读取请求由上层的 Partition Layer 处理
 		- Partition Layer
+			- 主要功能包括
+				- 管理和理解上层业务抽象：Blob，Table，Queue
+				- 提供 Object Namespace
+				- 为 Object 保证事务顺序和强一致性
+				- 在 Stream Layer 之上存储数据
+				- 缓存
+			- 此外还会提供一些基于 PartitionName 的负载均衡
 		- Front-End (FE) layer
+			- 一组无状态服务
+			- 请求进来的时候完成认证，然后路由到对应的 Partition Server
+			- 系统会维护一组 Partion Map，然后 FE 会 cache 这个 map 来提供转发的功能
+			- 论文还提到 FE 会从 Stream Layer 直接提供大对象并缓存一些经常访问的数据
+				- #question 这个有点奇怪，按照目前的设计，FE 还需要直接从 Stream 读取数据吗？
 	- Two Replication Engines
 		- Intra-Stamp Replication (stream layer)
 		- Inter-Stamp Replication (partition layer)
