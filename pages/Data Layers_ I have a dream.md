@@ -1,7 +1,6 @@
 title:: Data Layers: I have a dream
 
 -
--
 - 现状
 	- Table Trait
 	- Engine
@@ -18,22 +17,15 @@ title:: Data Layers: I have a dream
 	- Y = avro/parquet/csv/orc
 - 想法
 	- Features
-		- CDC: change data capture
-			- HTTP Webhook
-			- Database CDC
-		- Scheduled data fetch
-			- Load from source per hours?
 		- Query Pushdown
 			- S3 Selcet
 			- Big Query?
-		- Online ETL
 	- Data Connector
 		- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
 		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
 - 规划
 	- DAL2
 		- Init String
-		-
 	- Cloud Native Storage Format
 	- ```sql
 	  copy into default.test from '@stage' format parquet;
