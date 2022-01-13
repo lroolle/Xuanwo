@@ -1,0 +1,9 @@
+- What is Pin?
+	- > Pin exists to solve a very specific problem: self-referential datatypes, i.e. data structures which have pointers into themselves.
+	- > The Pin type wraps pointer types, guaranteeing that the values behind the pointer won't be moved. For example, Pin<&mut T>, Pin<&T>, Pin<Box<T>> all guarantee that T won't be moved even if T: !Unpin.
+- Rust 中的大部分类型都可以安全的 move，标准库默认为他们实现了 `Unpin`，只有一种情况例外：自引用类型。
+-
+- 参考资料
+	- [Rust Async Book: Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html)
+	- [Pin, Unpin, and why Rust needs them](https://blog.cloudflare.com/pin-and-unpin-in-rust/)
+	-
