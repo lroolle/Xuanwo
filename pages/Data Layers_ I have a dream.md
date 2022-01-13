@@ -2,6 +2,7 @@ title:: Data Layers: I have a dream
 
 -
 - 期望
+	- 具体的语法待定
 	- ```sql
 	  -- Create Stage
 	  create stage test
@@ -18,41 +19,36 @@ title:: Data Layers: I have a dream
 	        format CSV
 	        record_delimitor = ',';
 	        
-	  copy into 
+	  -- Copy data from table to stage
+	  copy into '@test/path/to/data' from test_csv;
 	  ```
 - 现状
-	- Table Trait
-	- Engine
-		- Fuse (file based)
-		- Github
-		- Memory
-	- Stream Source
-		- CSV
-		- Parquet
-		- Value
-- 用户故事
-	- 将 X 存储上的 Y 数据导入到 Databend
-	- X = s3/gcs/oss
-	- Y = avro/parquet/csv/orc
-- 想法
-	- Features
-		- Query Pushdown
-			- S3 Selcet
-			- Big Query?
-	- Data Connector
-		- format: [[Avro]], [[Parquet]], [[CSV]], httpd/nginx log, mysql dump files
-		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
-- 规划
-	- DAL2
-		- Init String
-	- Cloud Native Storage Format
-	- ```sql
-	  copy into default.test from '@stage' format parquet;
-	  ```
-	-
+	- storage  仅支持 s3，azblob 和 local fs
+	- storage 不支持服务器端加密
+	- storage 接口不正交，难以扩展新的存储支持
+	- format 仅支持 parquet / csv / memory
+- 改变
+	- storage type 归一化，将服务供应商与协议类型拆分开，
+		- aws_s3 => s3
+		- azure_blob => azblob
+		- local_fs => fs
+	- storage 接口重新设计 -> DAL2
+		- allow adding new type
+			- fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]]
+	- format trait -> allow adding new format
+		- httpd/nginx log
+		- mysql dump files
 - 现在的进展
 	- DAL2 refactor
 		- implement s3 support
+- 更远的想法
+	- Query Pushdown
+		- S3 Selcet
+		- Big Query?
+	- Cloud Native Storage Format
+		- parquet 不是面向 non-seekable storage 设计的
+			- 大量的 seek 操作导致请求量增加，维护内部的 buffer 实现复杂，不利于性能优化
+		- 我们需要自行设计或者改造一个新的 storage format
 - 参考资料
 	- [Prestodb Connectors](https://prestodb.io/docs/current/connector.html)
 	- [[Apache Flink/Connectors]]
