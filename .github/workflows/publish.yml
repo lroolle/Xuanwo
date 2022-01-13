@@ -13,7 +13,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Logseq Publish
-        uses: pengx17/logseq-publish@0.1.1
+        # Using main branch to reproduce https://github.com/pengx17/logseq-publish/issues/8
+        # Should switch back to stable release after this issue fixed.
+        uses: pengx17/logseq-publish@main
         with:
           dest: www
 
