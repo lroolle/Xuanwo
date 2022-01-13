@@ -1,6 +1,9 @@
 title:: Data Layers: I have a dream
 
 -
+- 状态
+	- 已经输出成内部的分享，整理后发表博客
+-
 - 期望
 	- 具体的语法待定
 	- ```sql
