@@ -1,6 +1,25 @@
 title:: Data Layers: I have a dream
 
 -
+- 期望
+	- ```sql
+	  -- Create Stage
+	  create stage test
+	        type = S3
+	        credential = 'hmac:ak:sk'
+	        endpoint = 'https://s3.awsamazon.com'
+	        bucket = 'bucket_name'
+	        region = 'us-west-1'
+	        root = '/path/to/data';
+	  ```
+	- ```sql
+	  -- Copy data from stage into table
+	  copy into test_csv from '@test/path/to/data'
+	        format CSV
+	        record_delimitor = ',';
+	        
+	  copy into 
+	  ```
 - 现状
 	- Table Trait
 	- Engine
