@@ -33,6 +33,8 @@ title:: Data Layers: I have a dream
 		- storage: fs/[[nfs]]/nas/[[s3]]/[[gcs]]/oss/[[ipfs]] -> DAL
 - 规划
 	- DAL2
+		- Init String
+		-
 	- Cloud Native Storage Format
 	- ```sql
 	  copy into default.test from '@stage' format parquet;
