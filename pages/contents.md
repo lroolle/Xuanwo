@@ -10,6 +10,7 @@
 	- 代码产出 [Xuanwo's Github](https://github.com/Xuanwo)
 -
 - Projects
+	- [[2022-02: 周报]]
 	- New Blog: [[Data Layers: I have a dream]]
 	- New Blog: [[CI of Open Source Projects]]
 - Areas
