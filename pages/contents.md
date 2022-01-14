@@ -10,9 +10,8 @@
 	- 代码产出 [Xuanwo's Github](https://github.com/Xuanwo)
 -
 - Projects
-	-
-	- New Blog: [[Data Layers: I have a dream]]
-	- New Blog: [[CI of Open Source Projects]]
+	- [[Data Layers: I have a dream]]
+	- [[CI of Open Source Projects]]
 - Areas
 	- [[Automation]]
 	- [[Database]]
