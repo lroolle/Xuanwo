@@ -178,6 +178,8 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 		- Stream Manager (SM)
 			- The SM keeps track of the stream namespace, what extents are in each stream, and the extent allocation across the Extent Nodes (EN).
 			- SM 本身是一个 [[Paxos]] 集群，不在读写的关键路径上
+			- SM 主要负责的任务
+				-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
