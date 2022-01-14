@@ -177,10 +177,11 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 		- ![image.png](../assets/image_1642003395836_0.png)
 		- Stream Manager (SM)
 			- The SM keeps track of the stream namespace, what extents are in each stream, and the extent allocation across the Extent Nodes (EN).
-			-
+			- SM 本身是一个 [[Paxos]] 集群，不在读写的关键路径上
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
 		- 后来 WAS 把前面的 windows 去掉了，只说 Azure Storage
 		- 肯定跟这个没关系 (
--
+- [[2022-01-14]] 感想
+	- 有种逐渐理解了一切的感觉， [[azblob]] 之前有些奇怪的设计都有了合理的解释
