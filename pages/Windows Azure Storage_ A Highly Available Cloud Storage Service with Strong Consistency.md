@@ -249,7 +249,8 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 					- 当且仅当三个节点都写入成功时返回 ack
 			- 当 Streams 中的 extent 被 seal 之后，这个流程会再次重复
 			- 前面提到 Extent 的相关信息会被 Client 缓存，所以 Client 会直接向 ENs 发送请求，直到需要创建新的 Extent
-			- 如果在写入的时候发生失败，Client 会跟 SM 通信，SM 会将
+			- 如果在写入的时候发生失败，Client 会跟 SM 通信，SM 会将当前的 extent 以现在的 commit length seal 并创建一个新的 extent (在其他的可用的 EN 上)
+				-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
