@@ -207,10 +207,25 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- Append Operation and Sealed Extent
 		- Append 操作是原子的，不存在中间状态
 			- #question 怎么做到的？听起来需要底下的文件系统提供一些保证。
+			- 如果 append 操作失败了，客户端可以重试(或者 seal 当前的 extent)
+				- 相对的，客户端需要能够处理一个 block 被 append 多次的情况
+				- 对 metadata 和 commit log stream
+					- 每个事务会被分配一个序列号
+					- 而重试的这个事务会使用同一个序列号，所以重复的 block 会被 last succeeded write 覆盖
+				- 对 row/blob 数据
+					- 所以成功写入的数据才会被 RangeParititon 引用
+					- 之前的 block 会因为没有被 reference 被 SM GC 掉
+				- 后面会更详细的介绍这些逻辑
 		- 多个 Block 可以作为一个原子操作同时 Append：“multi-block append”
-			-
+			- 看起来这个 batch 可以做得很大
 		- Stream 的最小读取单元是一个 Block
 			- 前文中有提到，每个 block 是有自己的 checksum，每次读的时候会进行校验
+		- 每个 extent 会有一个目标大小(由客户端指定)
+			- 当这个目标大小达到时(跟 block 的边界对齐)，这个 extent 会被 seal，并创建一个新的 extent
+			- 一个 extent seal 之后就变成 immutable 的，SM 可能会对这个 seal 做一些优化
+				- 比如说将较冷的 seal 转为纠删码形式进行储存
+			- streams 中的 extent 不要求大小一致，他们在任何时候都能被 seal，也能变得非常大
+	- Stream Layer Intra-Stamp Replication
 		-
 - ---
 - 无用但有趣的一些小发现
