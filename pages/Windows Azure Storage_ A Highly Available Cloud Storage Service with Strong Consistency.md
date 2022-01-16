@@ -318,6 +318,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- The partition layer stores the different types of objects and understands what a transaction means for a given object type (Blob, Table, or Queue).
 	- Partition Layer Data Model
 		- Object Table: OT
+		  collapsed:: true
 			- OT 可以达到数个 PB (
 			- OT 会被动态的划分为多个 RangePartition
 			- Partition Layer 中有如下 Object Table
@@ -335,10 +336,16 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- Partition Map Table
 					- 存储所有 OT 的 RangePartition 信息，以及 RangePartition 关联的 Partition Server 信息
 					- Front-End Server 使用这个表来路由请求到对应的 Partition Server
+			- Blob Table, Entity Table 和 Message Table 都使用 AccountName，PartitionName 和 ObjectName 作为主键来索引和排序
 		- RangePartition
 			- RangePartition 是 OT 中连续的区间
 			- OT 中的所有 RangePartition 都彼此不重叠
 			- 而且 OT 中的 row 总是会在某个 RangePartition 中
+		- Supported Data Types and Operations
+	- Partition Layer Architecture
+		- ![image.png](../assets/image_1642334536791_0.png)
+		- Partition Manager (PM)
+		-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
