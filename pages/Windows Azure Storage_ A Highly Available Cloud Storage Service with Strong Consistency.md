@@ -195,6 +195,23 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 这些数据能放进 32GB 的内存空间里面
 			- #question SM 内存中的数据会落盘吗？
 				- 目前还没看到这些细节
+		- Extent Nodes (EN)
+			- Each extent node maintains the storage for a set of extent replicas assigned to it by the SM.
+			- 每个 EN 有 N 块硬盘，完全由这个 EN 管理
+			- EN 对 Stream 无感知，只了解 Extent 和 Block
+			- Extent 的内部结构
+				- 一个 Extent 是一个独立文件(在 NTFS 上)
+				- 内部包含数据块以及它的 checksums，此外还有数据块 offset 的索引
+			- 每个 EN 会知道它有哪些 Extent 以及他们的 replica 在哪里
+			- EN 之间会互相通信来复制客户端的写入或者创建额外的副本
+	- Append Operation and Sealed Extent
+		- Append 操作是原子的，不存在中间状态
+			- #question 怎么做到的？听起来需要底下的文件系统提供一些保证。
+		- 多个 Block 可以作为一个原子操作同时 Append：“multi-block append”
+			-
+		- Stream 的最小读取单元是一个 Block
+			- 前文中有提到，每个 block 是有自己的 checksum，每次读的时候会进行校验
+		-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
