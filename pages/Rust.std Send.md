@@ -1,0 +1,9 @@
+- **Types that can be transferred across thread boundaries.**
+-
+-
+-
+-
+-
+- 参考资料
+	- [Trait std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html)
+	- [Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)
