@@ -238,14 +238,17 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 分配好 Extent 之后，这些信息会返回给 client
 				- 这个状态会被存储在 SM 元数据中，并缓存在 client 内存里
 			- 客户端的写入总是会先落到 Primary EN 上，然后 Primary EN 负责将这个写入复制到从节点上
-				- 从图中的示意来看，这里采用了链式复制
+				- #question 从图中的示意来看，这里采用了链式复制？
 				- 当一个 Extent 还没有被 seal 的时候，Primary EN 和他的副本位置保持不变
 				- 当客户端的写入收到 Primary EN 返回的 ack 之后，客户端就可以从任意副本中读取数据
 				- Primary EN 具体要做的事情包括
 					- 决定当前 append 在 extent 中的 offset
-					- 对 append 请求排序(如果存在并发 append)
-					- 把
+						- 最后一个 append 的位置会被当作当前副本的 commit length
+					- 对 append 请求排序(如果存在并发的乱序 append)
+					- 把 append 和被选中的 offset 发送给从节点
+					- 当且仅当三个节点都写入成功时返回 ack
 			- 当 Streams 中的 extent 被 seal 之后，这个流程会再次重复
+			- 前面提到 Extent 的相关信息会被 Client 缓存，所以 Client
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
