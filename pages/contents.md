@@ -9,8 +9,8 @@
 	- 探讨问题请在 [Discussions](https://github.com/Xuanwo/Xuanwo/discussions) 开启讨论
 -
 - Projects
-	- [[Data Layers: I have a dream]]
-	- [[CI of Open Source Projects]]
+	- Reading [[Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency]]
+	- Writing [[Data Layers: I have a dream]]
 - Areas
 	- [[Automation]]
 	- [[Database]]
