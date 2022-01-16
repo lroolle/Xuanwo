@@ -233,7 +233,19 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 也就是说会存在某个时刻，这个 extent 的某个副本还没有被 seal
 			- WAS 的数据中心中有其他的安全机制来防范恶意攻击，所以这里不需要考虑这种情况
 		- Replication Flow
-			-
+			- ![image.png](../assets/image_1642003395836_0.png)
+			- 如图所示，当创建 Extent 的时候 (Step A)，SM 会分配一个一主两从的 Extent Replica Set (Step B)
+				- 分配好 Extent 之后，这些信息会返回给 client
+				- 这个状态会被存储在 SM 元数据中，并缓存在 client 内存里
+			- 客户端的写入总是会先落到 Primary EN 上，然后 Primary EN 负责将这个写入复制到从节点上
+				- 从图中的示意来看，这里采用了链式复制
+				- 当一个 Extent 还没有被 seal 的时候，Primary EN 和他的副本位置保持不变
+				- 当客户端的写入收到 Primary EN 返回的 ack 之后，客户端就可以从任意副本中读取数据
+				- Primary EN 具体要做的事情包括
+					- 决定当前 append 在 extent 中的 offset
+					- 对 append 请求排序(如果存在并发 append)
+					- 把
+			- 当 Streams 中的 extent 被 seal 之后，这个流程会再次重复
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
