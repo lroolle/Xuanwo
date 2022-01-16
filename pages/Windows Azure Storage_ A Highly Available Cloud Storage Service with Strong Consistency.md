@@ -21,6 +21,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- 多租户和存储成本
 		- WAS 对存储成本的理解是比用户在自有硬件上承载相同的负载要更低
 - Global Partitioned Namespace
+  collapsed:: true
 	- WAS 采用全球统一的命名规则
 	- `http(s)://AccountName.<service>.core.windows.net/PartitionName/ObjectName`
 	- 其中
@@ -57,6 +58,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- Blobs 级别可以配置 Access Tier
 		- 感觉非常的优雅而合理
 - High Level Architecture
+  collapsed:: true
 	- ![image.png](../assets/image_1641989364550_0.png)
 	- Storage Stamps
 		- 每个 Storage Stamps 是由 N 个机柜组成的集群
@@ -233,6 +235,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 也就是说会存在某个时刻，这个 extent 的某个副本还没有被 seal
 			- WAS 的数据中心中有其他的安全机制来防范恶意攻击，所以这里不需要考虑这种情况
 		- Replication Flow
+		  collapsed:: true
 			- ![image.png](../assets/image_1642003395836_0.png)
 			- 如图所示，当创建 Extent 的时候 (Step A)，SM 会分配一个一主两从的 Extent Replica Set (Step B)
 				- 分配好 Extent 之后，这些信息会返回给 client
@@ -243,7 +246,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 当客户端的写入收到 Primary EN 返回的 ack 之后，客户端就可以从任意副本中读取数据
 				- Primary EN 具体要做的事情包括
 					- 决定当前 append 在 extent 中的 offset
-						- 最后一个 append 的位置会被当作当前副本的 commit length
+						- 最后一个 append 的位置会被当作当前副本的 **commit length**
 					- 对 append 请求排序(如果存在并发的乱序 append)
 					- 把 append 和被选中的 offset 发送给从节点
 					- 当且仅当三个节点都写入成功时返回 ack
@@ -253,7 +256,10 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 整个过程平均会在 20ms 内完成
 					- #idea 好快啊。。。
 				- 关键点在于这个客户端可以立即开始写一个新的 extent，不需要等待特定的节点恢复
-				- 与此同时，SM 会为刚刚被 seal 的 extent 会
+				- 与此同时，SM 会为刚刚被 seal 的 extent 创建一个新的副本，从而使得它满足冗余度的要求
+		- Sealing
+			- Seal 一个 Extent 的时候，SM 首先会向三个 EN 询问指定 extent 当前的 commit length
+			-
 			-
 - ---
 - 无用但有趣的一些小发现
