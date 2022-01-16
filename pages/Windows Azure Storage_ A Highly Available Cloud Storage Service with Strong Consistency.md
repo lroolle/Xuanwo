@@ -226,7 +226,14 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 比如说将较冷的 seal 转为纠删码形式进行储存
 			- streams 中的 extent 不要求大小一致，他们在任何时候都能被 seal，也能变得非常大
 	- Stream Layer Intra-Stamp Replication
-		-
+		- Partition Layer 的正确性基于 Stream Layer 提供的如下保证
+			- 一个记录写入成功之后(append & ack)，从任何一个副本读取这个记录都会获得相同的数据 -> 数据是不可变的
+			- 一旦一个 extent 被 seal 之后，从任何一个 sealed 副本读取都会获得相同的数据
+				- 注意这里强调了是 sealed replica
+				- 也就是说会存在某个时刻，这个 extent 的某个副本还没有被 seal
+			- WAS 的数据中心中有其他的安全机制来防范恶意攻击，所以这里不需要考虑这种情况
+		- Replication Flow
+			-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
