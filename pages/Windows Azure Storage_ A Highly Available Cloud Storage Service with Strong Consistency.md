@@ -277,7 +277,18 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 而且相比于三副本，纠删码实际上更能提升数据的持久性
 				- #question 论文这里没有将采用纠删码后这个 extent 在 stamp 内是怎么分布的，看起来是这些块会分布在不同的 SN 上？
 		- WAS 仅在 Blob Storage 上采用这项优化，应该是权衡性能和成本的结果
-	-
+	- Read Load-Balancing
+		- Client 在发起读取请求的时候会指定一个 deadline，如果 EN 满足不了这个 deadline 就会立刻返回，不再尝试
+			- #question 这个 deadline 具体是指哪个阶段的 deadline？
+			- #question 读取流程是分二阶段的吗？先发送预期的 deadline，能满足才发送真正的 read 请求？
+		- 这个优化也同样应用于纠删码处理之后的 Extent
+			- 如果读取已有的分片无法满足 deadline，client 会向所有的分片发送读取请求，然后使用最先返回的 N 个分片来重新构造出请求需要的数据
+	- Spindle Anti-Starvation
+		- 这个小章节介绍了硬盘公平调度的一个优化
+		- 当硬盘的队列过深的时候，可能会导致 IO 超过 2300ms 没有返回
+		- 所以 WAS 开发了自己的 IO 调度器，保证
+			- 当硬盘已经有超过 100ms 的待处理请求被调度
+			- 或者硬盘已经
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
