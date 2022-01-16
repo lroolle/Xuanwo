@@ -270,7 +270,14 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 所以所有的 Extent 副本最终都会达到完全一致的状态
 		- Interaction with Partition Layer
 			- 这个小章节讨论脑裂的情况：SM 无法访问指定的 EN，但是 Client 访问仍然正常
-				-
+			- #question 这个没读懂
+	- Erasure Coding Sealed Extents
+		- WAS 会运用 [[纠删码]] 来节省 Extent 的存储空间
+			- 通常来说，[[纠删码]] 相比于三副本能够节省一半以上的空间 ( 3x -> 1.3x ~ 1.5x)
+			- 而且相比于三副本，纠删码实际上更能提升数据的持久性
+				- #question 论文这里没有将采用纠删码后这个 extent 在 stamp 内是怎么分布的，看起来是这些块会分布在不同的 SN 上？
+		- WAS 仅在 Blob Storage 上采用这项优化，应该是权衡性能和成本的结果
+	-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
