@@ -248,7 +248,8 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 					- 把 append 和被选中的 offset 发送给从节点
 					- 当且仅当三个节点都写入成功时返回 ack
 			- 当 Streams 中的 extent 被 seal 之后，这个流程会再次重复
-			- 前面提到 Extent 的相关信息会被 Client 缓存，所以 Client
+			- 前面提到 Extent 的相关信息会被 Client 缓存，所以 Client 会直接向 ENs 发送请求，直到需要创建新的 Extent
+			- 如果在写入的时候发生失败
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
