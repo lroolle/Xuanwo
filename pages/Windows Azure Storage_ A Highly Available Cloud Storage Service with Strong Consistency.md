@@ -132,6 +132,7 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 			- 而 Inter-Stamp Replication 想处理的是整个机房挂掉的场景
 			- 前者在用户的核心 IO 路径上，所以延迟要求很高；而后者不在，所以只要速度能接受就行
 - Stream Layer
+  collapsed:: true
 	- *重头戏登场*
 	- The stream layer provides an internal interface used only by the partition layer.
 	- Stream 提供一个类似于 file system 的 API，只不过所有的写入都是 Append Only 的
@@ -294,13 +295,15 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 		- 每个 SN 节点上都会保留一块独立的硬盘作为 Journal Drive
 			- 只用来处理写入，因此可以发挥设备的全部写入带宽(没有读取竞争)
 			- #question 这个 journal drive 上的数据什么时候淘汰呢？
-				-
+				- 等到数据已经成功落到 data disk 之后？
 		- 当 EN 处理 Append 请求时，它会
 			- 将所有数据写入 Journal Drive
 			- 将这个 Append 请求排入对应数据盘的队列
 		- 任意一个操作成功时，EN 就会返回 ACK
 			- #question 为啥？
 				- 要是三个节点都只排入了队列但是还没落盘，读取不就全都失败了吗？
+				- 前面公平调度会保证这个 IO 在 200ms 内完成，看起来 WAS 会允许读取有一定的延迟
+				- 而且 Journal Drive 大概率会先写完，写完之后就能从内存读了
 		- 如果写 Journal 先成功，数据会被 buffer 到内存中直到数据成功落盘
 		- 这个优化通过引入一个不在核心路径的额外写来换取延迟优化
 			- 支持连续的大量写入和更好的调度并发读写来提高吞吐
@@ -310,7 +313,32 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 					- 没有 journal drive 的时候，平均延迟为 30ms
 					- 加上了 journal drive，平均延迟为 6ms
 					- 此外，延迟的方差也变小了非常多(更稳定)
-			-
+- Partition Layer
+  id:: 61e40501-32a7-4da1-a5ff-fbe2c26885e9
+	- The partition layer stores the different types of objects and understands what a transaction means for a given object type (Blob, Table, or Queue).
+	- Partition Layer Data Model
+		- Object Table: OT
+			- OT 可以达到数个 PB (
+			- OT 会被动态的划分为多个 RangePartition
+			- Partition Layer 中有如下 Object Table
+				- Account Table
+					- 存储分配到当前 Stamp 的所有帐号元信息及其配置
+				- Blob Table
+					- 存储分配到当前 Stamp 的所有帐号中的 Blob 对象
+				- Entity Table
+					- 存储分配到当前 Stamp 的所有帐号中的 Entity Rows
+					- 这是 [[Azure Tables]] 中使用的抽象
+				- Message Table
+					- 存储分配到当前 Stamp 的所有帐号中的队列中的信息
+				- Schema Table
+					- 存储所有 OT 中的 Schema 信息
+				- Partition Map Table
+					- 存储所有 OT 的 RangePartition 信息，以及 RangePartition 关联的 Partition Server 信息
+					- Front-End Server 使用这个表来路由请求到对应的 Partition Server
+		- RangePartition
+			- RangePartition 是 OT 中连续的区间
+			- OT 中的所有 RangePartition 都彼此不重叠
+			- 而且 OT 中的 row 总是会在某个 RangePartition 中
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
