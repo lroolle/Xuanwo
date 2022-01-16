@@ -292,14 +292,25 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 	- Durability and Journaling
 		- Stream Layer 的保证是任何 write 请求返回 ACK 的时候，他都会至少有三个持久化的副本
 		- 每个 SN 节点上都会保留一块独立的硬盘作为 Journal Drive
+			- 只用来处理写入，因此可以发挥设备的全部写入带宽(没有读取竞争)
+			- #question 这个 journal drive 上的数据什么时候淘汰呢？
+				-
 		- 当 EN 处理 Append 请求时，它会
 			- 将所有数据写入 Journal Drive
 			- 将这个 Append 请求排入对应数据盘的队列
 		- 任意一个操作成功时，EN 就会返回 ACK
-			- #question 为啥？只排入队列感觉挺危险的- -
+			- #question 为啥？
+				- 要是三个节点都只排入了队列但是还没落盘，读取不就全都失败了吗？
 		- 如果写 Journal 先成功，数据会被 buffer 到内存中直到数据成功落盘
-		- 这个优化会支持连续的大量写入和更好的调度并发读写来提高吞吐
-		-
+		- 这个优化通过引入一个不在核心路径的额外写来换取延迟优化
+			- 支持连续的大量写入和更好的调度并发读写来提高吞吐
+			- #question 这个优化没太理解是怎么 work 的
+				- 意义在于 append 操作不需要跟这块硬盘上的读取操作竞争，使得 append 操作的 commit 延迟更低且更稳定
+				- 论文中以 parition layer 的 commit log stream 作为例子
+					- 没有 journal drive 的时候，平均延迟为 30ms
+					- 加上了 journal drive，平均延迟为 6ms
+					- 此外，延迟的方差也变小了非常多(更稳定)
+			-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
