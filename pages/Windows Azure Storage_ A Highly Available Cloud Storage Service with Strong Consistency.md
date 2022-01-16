@@ -259,8 +259,18 @@ doi:: [10.1145/2043556.2043571](https://dl.acm.org/doi/10.1145/2043556.2043571)
 				- 与此同时，SM 会为刚刚被 seal 的 extent 创建一个新的副本，从而使得它满足冗余度的要求
 		- Sealing
 			- Seal 一个 Extent 的时候，SM 首先会向三个 EN 询问指定 extent 当前的 commit length
-			-
-			-
+			- 然后 SM 会选择可用的 EN 中最小的 commit length
+				- 考虑前面的正确性保证，大于这个 comment length 的写入都没有返回 ack
+				- 相反的，在这个 commit length 之前的所有写入都已经正常返回了 ack
+					- #idea 考虑前面的客户端失败的处理，如果写入返回了 ack 但是客户端没有收到，此时客户端会 retry 这个请求。
+				- 所以这一步中不会出现数据丢失
+			- 所有 SM 可访问的 EN 都会以 SM 选择的 commit length 进行 seal
+			- seal 完成后，这个 commit length 就是不可变的
+			- 如果某个 EN 在 seal 的时候无法访问但是随后又自己恢复了，SM 会强迫这个 EN 将指定的 Extent 同步到指定的 commit length 并标记为 sealed
+			- 所以所有的 Extent 副本最终都会达到完全一致的状态
+		- Interaction with Partition Layer
+			- 这个小章节讨论脑裂的情况：SM 无法访问指定的 EN，但是 Client 访问仍然正常
+				-
 - ---
 - 无用但有趣的一些小发现
 	- WAS 很容易手滑打成 AWS (
