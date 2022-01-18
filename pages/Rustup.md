@@ -1,24 +1,58 @@
 - How it works
 	- `~/.cargo/bin` 下面的 `cargo` 和 `rustc` 等组件实际上是一个 proxy，会把对应的命令转发给具体的 toolchain
+		- 这些 proxy 实际上都是同一个二进制，通过不同的 args[0] 来切换行为
+		- ```shell
+		  > md5sum ~/.cargo/bin/*
+		  
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/cargo
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/cargo-clippy
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/cargo-fmt
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/cargo-miri
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/clippy-driver
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rls
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rustc
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rustdoc
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rustfmt
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rust-gdb
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rust-lldb
+		  410d383b027062058a66f6549045be3f  /home/xuanwo/.cargo/bin/rustup
+		  
+		  ```
 	- 实现 https://github.com/rust-lang/rustup/blob/master/src/bin/rustup-init.rs#L1-L12
-	- ```rust
-	          Some(n) => {
-	              if TOOLS.iter().chain(DUP_TOOLS.iter()).any(|&name| name == n) {
-	                  proxy_mode::main(n)
-	              } else {
-	                  Err(anyhow!(format!(
-	                      "unknown proxy name: '{}'; valid proxy names are {}",
-	                      n,
-	                      TOOLS
-	                          .iter()
-	                          .chain(DUP_TOOLS.iter())
-	                          .map(|s| format!("'{}'", s))
-	                          .collect::<Vec<_>>()
-	                          .join(", ")
-	                  )))
-	              }
-	          }
-	  ```
+		- ```rust
+		  // A list of all binaries which Rustup will proxy.
+		  pub static TOOLS: &[&str] = &[
+		      "rustc",
+		      "rustdoc",
+		      "cargo",
+		      "rust-lldb",
+		      "rust-gdb",
+		      "rust-gdbgui",
+		      "rls",
+		      "cargo-clippy",
+		      "clippy-driver",
+		      "cargo-miri",
+		  ];
+		  
+		  ```
+		- ```rust
+		  		Some(n) => {
+		              if TOOLS.iter().chain(DUP_TOOLS.iter()).any(|&name| name == n) {
+		                  proxy_mode::main(n)
+		              } else {
+		                  Err(anyhow!(format!(
+		                      "unknown proxy name: '{}'; valid proxy names are {}",
+		                      n,
+		                      TOOLS
+		                          .iter()
+		                          .chain(DUP_TOOLS.iter())
+		                          .map(|s| format!("'{}'", s))
+		                          .collect::<Vec<_>>()
+		                          .join(", ")
+		                  )))
+		              }
+		          }
+		  ```
 - toolchain file
 	- ```toml
 	  [toolchain]
