@@ -39,7 +39,18 @@
 -
 - 尽量避免使用 doctest，非常慢(
 -
+- `#[test]` 很慢，我们可以使用自己的 Test Harness
+	- ```rust
+	  [[test]]
+	  name = "integration"
+	  path = "integration/main.rs"
+	  harness = false
+	  ```
+	- ```shell
+	  cargo test integration
+	  ```
 -
 - 参考资料
 	- [Delete Cargo Integration Tests](https://matklad.github.io/2021/02/27/delete-cargo-integration-tests.html)
 	- [Databend: Further discussion on testing styles](https://github.com/datafuselabs/databend/discussions/3473)
+	- [How to Build a Custom Test Harness in Rust](https://www.infinyon.com/blog/2021/04/rust-custom-test-harness/)
