@@ -1,3 +1,6 @@
+- [[Rust]] 多版本管理的组件
+	- 其他语言中类似的工具包括 Ruby's rbenv, Python's pyenv, or Node's nvm.
+-
 - How it works
 	- `~/.cargo/bin` 下面的 `cargo` 和 `rustc` 等组件实际上是一个 proxy，会把对应的命令转发给具体的 toolchain
 		- 这些 proxy 实际上都是同一个二进制，通过不同的 args[0] 来切换行为

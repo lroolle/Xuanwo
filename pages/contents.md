@@ -10,7 +10,8 @@
 -
 - Projects
 	- Reading [[Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency]]
-	- Writing [[Data Layers: I have a dream]]
+	- 实现 [[Databend]] 的 DAL 重构
+	- 重构 [[Databend]] 测试
 - Areas
 	- [[Automation]]
 	- [[Database]]
