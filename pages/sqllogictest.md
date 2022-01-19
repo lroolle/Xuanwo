@@ -42,4 +42,3 @@
 -
 - 参考实现： https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki
 - Rust 实现：[sqllogictest-rs](https://github.com/singularity-data/sqllogictest-rs)
--
