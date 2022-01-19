@@ -168,7 +168,7 @@
   :block/updated-at 1641570460618}
  {:block/name "contents",
   :block/created-at 1640852033376,
-  :block/updated-at 1642341893990}
+  :block/updated-at 1642484304117}
  {:block/name "contribute to rust",
   :block/created-at 1640855316858,
   :block/updated-at 1640855959872}
@@ -219,8 +219,8 @@
   :block/created-at 1641456448480,
   :block/updated-at 1641456448480}
  {:block/name "erasure coding",
-  :block/created-at 1642444146722,
-  :block/updated-at 1642444146722}
+  :block/created-at 1642504384892,
+  :block/updated-at 1642504384892}
  {:block/name "ext4",
   :block/created-at 1641570460618,
   :block/updated-at 1641570460618}
@@ -524,8 +524,8 @@
   :block/created-at 1640856388908,
   :block/updated-at 1640856403693}
  {:block/name "reed-solomon 编码",
-  :block/created-at 1642444146722,
-  :block/updated-at 1642444146722}
+  :block/created-at 1642504384892,
+  :block/updated-at 1642504384892}
  {:block/name "rsut",
   :block/created-at 1642171528810,
   :block/updated-at 1642171528810}
@@ -564,7 +564,10 @@
   :block/updated-at 1642342656755}
  {:block/name "rust/test",
   :block/created-at 1641984612541,
-  :block/updated-at 1641984866570}
+  :block/updated-at 1642488298748}
+ {:block/name "rustup",
+  :block/created-at 1642476591578,
+  :block/updated-at 1642484129597}
  {:block/name "s3",
   :block/created-at 1641878230974,
   :block/updated-at 1641878370629}
