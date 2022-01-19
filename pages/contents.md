@@ -11,7 +11,7 @@
 - Projects
 	- Reading [[Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency]]
 	- 实现 [[Databend]] 的 DAL 重构
-	- 重构 [[Databend]] 测试
+	- [[Databend 测试重构]]
 - Areas
 	- [[Automation]]
 	- [[Database]]
