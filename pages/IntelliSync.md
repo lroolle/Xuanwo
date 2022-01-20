@@ -1,0 +1,10 @@
+- 对标 [[Dropbox]] 的 Smart Sync？
+-
+- 技术实现
+	- Fuse？
+	- 区分文件状态？
+	- 维护内存索引吗？
+- 可能会用到的库
+	- rust fuse support
+		- https://github.com/zargony/fuse-rs
+	-

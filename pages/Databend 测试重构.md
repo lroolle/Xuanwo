@@ -1,3 +1,7 @@
+- 一些考虑
+	- 容器集成？
+		- https://github.com/testcontainers/testcontainers-rs
+-
 - 参考资料
 	- Materialize
 		- https://github.com/MaterializeInc/materialize/blob/main/doc/developer/guide-testing.md
