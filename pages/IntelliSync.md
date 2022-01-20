@@ -1,9 +1,14 @@
 - 对标 [[Dropbox]] 的 Smart Sync？
 -
-- 技术实现
+- v0
 	- Fuse？
 	- 区分文件状态？
-	- 维护内存索引吗？
+	- 维护内存索引？
+- v1
+	- 怎么样给文件的图表加角标来标记状态呢？
+		- 感觉是完全没有接触过的领域
+			- 需要实现 [[dolphin]] 的插件？
+-
 - 可能会用到的库
 	- rust fuse support
 		- https://github.com/zargony/fuse-rs
