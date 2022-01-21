@@ -7,7 +7,10 @@
 	  }
 	  ```
 -
--
+- Pin 是什么？
+	- > Pin exists to solve a very specific problem: self-referential datatypes, i.e. data structures which have pointers into themselves.
+	- Pin 是一个智能指针类型，确保被它包裹的指针指向的数据不会被 move
+		- 比如说 `Pin<&mut T>`, `Pin<&T>`, `Pin<Box<T>>` 都保证了 `T: !Unpin` 不会被 move
 -
 - 为什么需要 Pin ？
 	- ```rust
@@ -67,9 +70,6 @@
 		  }
 		  ```
 -
-- What is Pin?
-	- > Pin exists to solve a very specific problem: self-referential datatypes, i.e. data structures which have pointers into themselves.
-	- > The Pin type wraps pointer types, guaranteeing that the values behind the pointer won't be moved. For example, Pin<&mut T>, Pin<&T>, Pin<Box<T>> all guarantee that T won't be moved even if T: !Unpin.
 - 关于 Pin 的黄金八条 (来自 Rust Async Book，简要翻译如下)
 	- 如果 `T: Unpin` (默认行为)，那么 `Pin<'a, T>` 完全等价于 `&'a mut T`。
 		- 换句话说，`Unpin` 意味着 T 就算被 pin 住了也能 move，所以 Pin 对 T 完全没有作用。
@@ -87,5 +87,5 @@
 - 参考资料
 	- [Rust Async Book: Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html)
 	- [Pin, Unpin, and why Rust needs them](https://blog.cloudflare.com/pin-and-unpin-in-rust/)
-	- [Rust 的 Pin 与 Unpin](https://folyd.com/blog/rust-pin-unpin/)
-	-
+	- [Rust 的 Pin 与 Unpin](https://folyd.com/blog/rust-pin-unpin/)  *通俗易懂，推荐！*
+	- [Without boats: pinning 相关文章](https://without.boats/tags/pinning/)
